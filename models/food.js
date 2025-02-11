@@ -25,6 +25,7 @@ const schema = new Schema(
           '水果類',
           '乳品類',
           '調味料及辛香料類',
+          '其他類',
         ],
         message: '食物分類不符',
       },
