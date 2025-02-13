@@ -42,6 +42,7 @@ const schema = new Schema(
     },
     avatar: {
       type: String,
+      default: '',
     },
     weight: {
       type: Number,
