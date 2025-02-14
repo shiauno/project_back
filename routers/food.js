@@ -6,9 +6,9 @@ import upload from '../middlewares/upload.js'
 const router = Router()
 
 router.post('/', auth.jwt, auth.admin, upload, food.create)
-// router.get('/', food.get)
+router.get('/', food.get)
 router.get('/all', auth.jwt, auth.admin, food.getAll)
 router.get('/:id', food.getId)
-router.patch('/:id', food.edit)
+router.patch('/:id', auth.jwt, auth.admin, upload, food.edit)
 
 export default router
