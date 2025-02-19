@@ -61,6 +61,9 @@ export const profile = async (req, res) => {
     result: {
       account: req.user.account,
       role: req.user.role,
+      weight: req.user.weight,
+      email: req.user.email,
+      avatar: req.user.avatar,
     },
   })
 }
