@@ -68,6 +68,41 @@ export const profile = async (req, res) => {
   })
 }
 
+export const edit = async (req, res) => {
+  try {
+    req.body.image = req.file?.path
+    const result = await User.findByIdAndUpdate(req.user._id, req.body, {
+      runValidators: true,
+      new: true,
+    }).orFail(new Error('NOT FOUND'))
+
+    res.status(StatusCodes.OK).json({
+      success: true,
+      message: '',
+      result,
+    })
+  } catch (error) {
+    console.log(error)
+    if (error.name === 'NOT FOUND') {
+      res.status(StatusCodes.NOT_FOUND).json({
+        success: false,
+        message: '查無使用者',
+      })
+    } else if (error.message === 'ValidationError') {
+      const key = Object.keys(error.errors)[0]
+      res.status(StatusCodes.BAD_REQUEST).json({
+        success: false,
+        message: error.errors[key].message,
+      })
+    } else {
+      res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({
+        success: false,
+        message: '伺服器錯誤',
+      })
+    }
+  }
+}
+
 export const refresh = async (req, res) => {
   try {
     const idx = req.user.tokens.findIndex((token) => token === req.token)
