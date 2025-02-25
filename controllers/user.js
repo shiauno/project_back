@@ -71,6 +71,7 @@ export const profile = async (req, res) => {
 export const edit = async (req, res) => {
   try {
     req.body.image = req.file?.path
+    console.log(req.body)
     const result = await User.findByIdAndUpdate(req.user._id, req.body, {
       runValidators: true,
       new: true,
