@@ -40,7 +40,7 @@ const schema = new Schema(
       type: Number,
       default: UserRole.USER,
     },
-    avatar: {
+    image: {
       type: String,
       default: '',
     },
