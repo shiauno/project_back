@@ -80,8 +80,7 @@ export const get = async (req, res) => {
       },
       time: time,
     }).lean()
-
-    console.log('初始查詢結果:', JSON.stringify(records))
+    // console.log('初始查詢結果:', JSON.stringify(records))
 
     // 查詢每個記錄中的 food 詳細資料
     for (const record of records) {
@@ -90,9 +89,7 @@ export const get = async (req, res) => {
         record.foodDetails = food // 將食物詳細資料添加到記錄中
       }
     }
-
-    console.log('後端測試' + JSON.stringify(records))
-
+    // console.log('後端測試' + JSON.stringify(records))
     res.status(StatusCodes.OK).json({
       success: true,
       message: '',
