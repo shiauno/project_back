@@ -69,6 +69,9 @@ export const get = async (req, res) => {
     const endDate = new Date(date)
     endDate.setHours(23, 59, 59, 999) // 設置為當天結束時間
 
+    console.log('開始時間:', startDate)
+    console.log('結束時間:', endDate)
+
     // 查詢在特定時間範圍內創建且 time 欄位為指定值的記錄
     const records = await Record.find({
       createdAt: {
@@ -78,14 +81,17 @@ export const get = async (req, res) => {
       time: time,
     }).lean()
 
+    console.log('初始查詢結果:', JSON.stringify(records))
+
     // 查詢每個記錄中的 food 詳細資料
     for (const record of records) {
-      const food = await Food.findById(record.food).lean()
-      console.log('好奇這是甚麼:' + food)
+      const food = await Food.findById(record.food)
       if (food) {
         record.foodDetails = food // 將食物詳細資料添加到記錄中
       }
     }
+
+    console.log('後端測試' + JSON.stringify(records))
 
     res.status(StatusCodes.OK).json({
       success: true,
