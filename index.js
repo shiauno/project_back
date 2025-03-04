@@ -1,5 +1,6 @@
 import 'dotenv/config'
 import express from 'express'
+import multer from 'multer'
 import mongoose from 'mongoose'
 import { StatusCodes } from 'http-status-codes'
 import routerUser from './routers/user.js'
@@ -19,10 +20,13 @@ mongoose
   })
 
 const app = express()
+const upload = multer()
 
 app.use(cors())
 
+app.use(upload.none())
 app.use(express.json())
+app.use(express.urlencoded({ extended: true }))
 app.use((error, req, res, next) => {
   res.status(StatusCodes.BAD_REQUEST).json({
     success: false,

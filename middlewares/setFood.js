@@ -2,7 +2,7 @@ import Food from '../models/food.js'
 import { StatusCodes } from 'http-status-codes'
 
 const setFood = async (req, res, next) => {
-  console.log('中介的:' + req.body.food)
+  console.log('中介的:' + JSON.stringify(req.body, null, 2))
   try {
     if (!req.body.food) {
       return res.status(StatusCodes.BAD_REQUEST).json({

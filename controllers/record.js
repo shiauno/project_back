@@ -104,3 +104,27 @@ export const get = async (req, res) => {
     })
   }
 }
+
+export const getDR = async (req, res) => {
+  try {
+    try {
+      const today = new Date()
+      console.log('今天時間:', today)
+
+      const records = await Record.find({
+        date: { $gte: today },
+      })
+
+      res.status(StatusCodes.OK).json({ success: true, records })
+    } catch (error) {
+      console.error('無法獲取今日紀錄', error)
+      res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({
+        success: false,
+        message: '無法獲取今日紀錄',
+        error: error.message,
+      })
+    }
+  } catch (error) {
+    console.log(error)
+  }
+}
