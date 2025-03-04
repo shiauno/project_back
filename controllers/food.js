@@ -133,3 +133,28 @@ export const edit = async (req, res) => {
     }
   }
 }
+
+export const deleteFood = async (req, res) => {
+  try {
+    if (!validator.isMongoId(req.params.id)) throw new Error('ID')
+
+    await Food.findByIdAndDelete(req.params.id)
+    res.status(StatusCodes.OK).json({
+      success: true,
+      message: '食物刪除成功',
+    })
+  } catch (error) {
+    console.log(error)
+    if (error.message === 'NOT FOUND') {
+      res.status(StatusCodes.NOT_FOUND).json({
+        success: false,
+        message: '找不到食物',
+      })
+    } else {
+      res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({
+        success: false,
+        message: '刪除失敗',
+      })
+    }
+  }
+}
