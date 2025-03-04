@@ -79,6 +79,7 @@ export const get = async (req, res) => {
         $lte: endDate,
       },
       time: time,
+      user: req.user._id,
     }).lean()
     // console.log('初始查詢結果:', JSON.stringify(records))
 
