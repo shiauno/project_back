@@ -32,7 +32,6 @@ const schema = new Schema(
     },
     image: {
       type: String,
-      required: [true, '食物圖片必填'],
     },
     calorie: {
       type: Number,
@@ -41,12 +40,10 @@ const schema = new Schema(
     },
     moisture: {
       type: Number,
-      required: [true, '食物水分必填'],
       min: [0, '食物水分不可為負數'],
     },
     protein: {
       type: Number,
-      required: [true, '食物蛋白質必填'],
       min: [0, '食物蛋白質不可為負數'],
     },
     fat: {
@@ -66,12 +63,10 @@ const schema = new Schema(
     },
     fibre: {
       type: Number,
-      required: [true, '食物纖維必填'],
       min: [0, '食物纖維不可為負數'],
     },
     cholesterol: {
       type: Number,
-      required: [true, '食物膽固醇必填'],
       min: [0, '食物膽固醇不可為負數'],
     },
   },

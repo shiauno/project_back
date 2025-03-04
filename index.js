@@ -24,7 +24,7 @@ const upload = multer()
 
 app.use(cors())
 
-app.use(upload.none())
+// app.use(upload.none())
 app.use(express.json())
 app.use(express.urlencoded({ extended: true }))
 app.use((error, req, res, next) => {
@@ -32,6 +32,10 @@ app.use((error, req, res, next) => {
     success: false,
     message: '請求格式錯誤',
   })
+})
+
+app.use('/record', (req, res, next) => {
+  upload.none()(req, res, next)
 })
 
 app.use('/user', routerUser)
