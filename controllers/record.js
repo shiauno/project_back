@@ -2,6 +2,7 @@ import Record from '../models/record.js'
 import User from '../models/user.js'
 import Food from '../models/food.js'
 import { StatusCodes } from 'http-status-codes'
+import validator from 'validator'
 
 export const create = async (req, res) => {
   try {
@@ -127,5 +128,30 @@ export const getDR = async (req, res) => {
     }
   } catch (error) {
     console.log(error)
+  }
+}
+
+export const deleteRecord = async (req, res) => {
+  try {
+    if (!validator.isMongoId(req.params.id)) throw new Error('ID')
+
+    await Record.findByIdAndDelete(req.params.id)
+    res.status(StatusCodes.OK).json({
+      success: true,
+      message: '飲食紀錄刪除成功',
+    })
+  } catch (error) {
+    console.log(error)
+    if (error.message === 'NOT FOUND') {
+      res.status(StatusCodes.NOT_FOUND).json({
+        success: false,
+        message: '找不到紀錄',
+      })
+    } else {
+      res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({
+        success: false,
+        message: '刪除失敗',
+      })
+    }
   }
 }

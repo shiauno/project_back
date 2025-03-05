@@ -42,7 +42,8 @@ const schema = new Schema(
     },
     image: {
       type: String,
-      default: '',
+      default:
+        'https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEiRuu0RWoeHs26-kJWDLyILcJZ9OljBuc_LyatexrDqGsYOBKNqKJWrt_jKhFATb1jmj124nhh4vTprkPzcRYemzFuSxbCR9cGFomOZx-vnOwQ5a16_4TmbjRWUolmtkNHg_d_5h-BtyvoTMJCvJ6ZmiiiSyu_0RfsbAStBrMaoUm8HN6NFJHIi-Lv8f0hh/s400/bird_fukurou_run.png',
     },
     weight: {
       type: Number,
